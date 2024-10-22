@@ -7,22 +7,22 @@ let servicePrice1 = +prompt('Сколько это будет стоить?');
 let service2 = prompt('Какой дополнительный тип услуги нужен?');
 let servicePrice2 = +prompt('Сколько это будет стоить?');
 let rollback = 5;
+
+
 let allServicePrices = function getAllServicePrices() {
   return servicePrice1 + servicePrice2;
 };
-let fullPrice = getFullPrice();
-let servicePercentPrice = getServicePercentPrices();
 function getServicePercentPrices() {
   return fullPrice - (fullPrice * rollback / 100);
-}
+};
 function getFullPrice() {
   return screenPrice + allServicePrices();
-}
+};
 function getTitle(title) {
   title = title.trim(); // Убираем пробелы
   if (title.length === 0) return ""; // Если пустая строка, то возвращаем пустую строку
   return title[0].toUpperCase() + title.slice(1).toLowerCase(); // Первый символ в верхний регистр, остальные в нижний
-}
+};
 const getRollbackMessage = function(price) {
   if (price > 30000) {
     return "Даем скидку в 10%";
@@ -32,15 +32,20 @@ const getRollbackMessage = function(price) {
     return "Скидка не предусмотрена";
   } else {
     return "Что-то пошло не так";
-  }
+  };
 };
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
 
+title = getTitle(title);
+let fullPrice = getFullPrice();
+let servicePercentPrice = getServicePercentPrices();
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
+
+
 console.log('Типы экранов:', ' ', screens);
 console.log('Стоимость за вычетом процента отката посреднику:', ' ', Math.ceil(getServicePercentPrices()));
 console.log(getRollbackMessage(fullPrice));
