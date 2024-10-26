@@ -12,17 +12,6 @@ let rollback = 5;
 let allServicePrices = function getAllServicePrices() {
   return servicePrice1 + servicePrice2;
 };
-function getServicePercentPrices() {
-  return fullPrice - (fullPrice * rollback / 100);
-};
-function getFullPrice() {
-  return screenPrice + allServicePrices();
-};
-function getTitle(title) {
-  title = title.trim(); // Убираем пробелы
-  if (title.length === 0) return ""; // Если пустая строка, то возвращаем пустую строку
-  return title[0].toUpperCase() + title.slice(1).toLowerCase(); // Первый символ в верхний регистр, остальные в нижний
-};
 const getRollbackMessage = function(price) {
   if (price > 30000) {
     return "Даем скидку в 10%";
@@ -37,6 +26,18 @@ const getRollbackMessage = function(price) {
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
+function getServicePercentPrices() {
+  return fullPrice - (fullPrice * rollback / 100);
+};
+function getFullPrice() {
+  return screenPrice + allServicePrices();
+};
+function getTitle(title) {
+  title = title.trim(); // Убираем пробелы
+  if (title.length === 0) return ""; // Если пустая строка, то возвращаем пустую строку
+  return title[0].toUpperCase() + title.slice(1).toLowerCase(); // Первый символ в верхний регистр, остальные в нижний
+};
+
 
 title = getTitle(title);
 let fullPrice = getFullPrice();
