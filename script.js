@@ -7,7 +7,8 @@ let servicePrice1 = +prompt('Сколько это будет стоить?');
 let service2 = prompt('Какой дополнительный тип услуги нужен?');
 let servicePrice2 = +prompt('Сколько это будет стоить?');
 let rollback = 5;
-
+let fullPrice;
+let servicePercentPrice;
 
 let allServicePrices = function getAllServicePrices() {
   return servicePrice1 + servicePrice2;
@@ -40,8 +41,8 @@ function getTitle(title) {
 
 
 title = getTitle(title);
-let fullPrice = getFullPrice();
-let servicePercentPrice = getServicePercentPrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
