@@ -27,15 +27,17 @@ const asking = function() {
 
 const getAllServicePrices = function () {
   let sum = 0;
+  let price;
   for (let i = 0; i < 2; i++) {
     if (i === 0) {
       service1 = prompt('Какой дополнительный тип услуги нужен?', 'что-то');
     } else if (i === 1) {
       service2 = prompt('Какой дополнительный тип услуги нужен?', 'что-то');
     };
-    while (!isNumber(prompt('Сколько это будет стоить?', '1000'))) {
-      sum += +prompt('Сколько это будет стоить?', '1000');
-    };
+    do {
+      price = prompt('Сколько это будет стоить?', '1000');
+    } while (!isNumber(price));
+    sum += +price;
   };
   return sum;
 };
