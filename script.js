@@ -81,15 +81,12 @@ const appData = {
   },
 
   logger() {
-    console.log("Название проекта:", this.title);
-    console.log("Типы экранов:", this.screens);
-    console.log("Стоимость экранов:", this.screenPrice);
-    console.log("Нужен адаптив:", this.adaptive);
-    console.log("Стоимость дополнительных услуг:", this.allServicePrices);
-    console.log("Полная стоимость проекта:", this.fullPrice);
-    console.log("Стоимость проекта с учетом отката:", this.servicePercentPrice);
-    console.log(this.getRollbackMessage());
+    for (let key in appData) {
+      console.log(key + ':', appData[key]);
+    }
   }
 };
 
 appData.start();
+
+
