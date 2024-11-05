@@ -2,42 +2,59 @@
 
 const appData = {
   title: '',
-  screens: '',
+  screens: [],
   screenPrice: 0,
   adaptive: true,
   rollback: 10,
   allServicePrices: 0,
   fullPrice: 0,
   servicePercentPrice: 0,
-  service1: '',
-  service2: '',
+  services: {},
   
   asking() {
-    appData.title = prompt('Как называется ваш проект?', 'Онлайн-магазин');
-    appData.screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
     do {
-      appData.screenPrice = +prompt('Сколько будет стоить данная работа?', '12000');
-    } while (!appData.isNumber(appData.screenPrice));
-    appData.adaptive = confirm('Нужен ли адаптив на сайте?');
-  },
+      appData.title = prompt('Как называется ваш проект?', 'Онлайн-магазин');
+    } while (appData.isNumber(appData.title));
+     
 
-
-  isNumber(num) {
-    return !isNaN(parseFloat(num)) && isFinite(num);
-  },
-
-
-  getAllServicePrices() {
-    let sum = 0;
-    let price;
     for (let i = 0; i < 2; i++) {
-      const service = prompt('Какой дополнительный тип услуги нужен?', 'что-то');
+      let name;
+      do {
+        name = prompt('Какие типы экранов нужно разработать?', 'Простые');
+      } while (appData.isNumber(name));
+      let price;
+      do {
+        price = +prompt('Сколько будет стоить данная работа?', '12000');
+      } while (!appData.isNumber(price));
+      appData.screens.push({id: i, name: name, price: price});
+    };
+
+    for (let i = 0; i < 2; i++) {
+      let name;
+      do {
+        name = prompt('Какой дополнительный тип услуги нужен?', 'что-то');
+      } while (appData.isNumber(name));
+      let price;
       do {
         price = +prompt('Сколько это будет стоить?', '1000');
       } while (!appData.isNumber(price));
-      sum += price;
-    }
-    appData.allServicePrices = sum;
+      appData.services[name] = +price;
+    };
+    
+    appData.adaptive = confirm('Нужен ли адаптив на сайте?');
+  },
+
+  addPrices: function() {
+    for (let screen of appData.screens) {
+    appData.screenPrice += +screen.price;
+    };    
+    for (let key in appData.services) {
+      appData.allServicePrices += appData.services[key];
+    };
+  },
+
+  isNumber(num) {
+    return !isNaN(parseFloat(num)) && isFinite(num);
   },
 
 
@@ -73,7 +90,7 @@ const appData = {
 
   start() {
     appData.asking();
-    appData.getAllServicePrices();
+    appData.addPrices();
     appData.getFullPrice();
     appData.getServicePercentPrices();
     appData.getTitle();
@@ -81,12 +98,17 @@ const appData = {
   },
 
   logger() {
-    for (let key in appData) {
-      console.log(key + ':', appData[key]);
-    }
+    console.log('Какие экраны нужны: ', appData.screens);
+    console.log('Полная стоимость: ', appData.fullPrice);
+    console.log('Стоимость с учетом вычета: ', appData.servicePercentPrice);
   }
 };
 
 appData.start();
 
 
+// logger() {
+//   for (let key in appData) {
+//     console.log(key + ':', appData[key]);
+//   }
+// }
